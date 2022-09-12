@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pong Game</title>
+    <link href="./style.css" rel="stylesheet">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🙂</text></svg>">
+</head>
+
+<body>
+    <canvas id="canv"></canvas>
+
+
+    <script type="module">
+        "use strict"
+        import { getCanvas} from "./engine/scripts.js"
+        import Time from "./engine/Time.js"
+        import Input from "./engine/Input.js"
+
+        
+        import Game from "./engine/Game.js"
+        import MainScene from "./pong_game/MainScene.js"
+        import StartScene from "./pong_game/StartScene.js"
+        import SceneTransition from "./pong_game/SceneTransition/SceneTransition.js"
+        import SecondScene from "./pong_game/SecondScene.js"
+        import ThirdScene from "./pong_game/Third_Scene/ThirdScene.js"
+        import FourthScene from "./pong_game/FourthScene/FourthScene.js"
+        import FifthScene from "./pong_game/FifthScene/FifthScene.js"
+        import SixthScene from "./pong_game/SixthScene/SixthScene.js"
+        import SceneTransition2 from "./pong_game/SceneTransition2/SceneTransition2.js"
+        import SceneTransition3 from "./pong_game/SceneTransition3/SceneTransition3.js"
+        import SceneTransition4 from "./pong_game/SceneTransition4/SceneTransition4.js"
+        import SceneTransition5 from "./pong_game/SceneTransition5/SceneTransition5.js"
+        import SceneTransition6 from "./pong_game/SceneTransition6/SceneTransition6.js"
+
+        Input.attach(document);
+
+        let { canvas, ctx } = getCanvas();
+
+        
+        let scene = new MainScene();
+        let scene2 = new SecondScene();
+        let scene3 = new ThirdScene();
+        let scene4 = new FourthScene();
+        let startScene = new StartScene();
+        let scene6 = new SixthScene();
+        let scene5 = new FifthScene();
+        let sceneTransition = new SceneTransition();
+        let sceneTransition2 = new SceneTransition2();
+        let sceneTransition3 = new SceneTransition3();
+        let sceneTransition4 = new SceneTransition4();
+        let sceneTransition5 = new SceneTransition5();
+        let sceneTransition6 = new SceneTransition6();
+        Game.scenes.push(startScene); // 0 
+        Game.scenes.push(scene); // 1
+        Game.scenes.push(sceneTransition); // 2
+        Game.scenes.push(scene2); // 3
+        Game.scenes.push(sceneTransition2); // 4    
+        Game.scenes.push(scene3); // 5
+        Game.scenes.push(sceneTransition3); //6
+        Game.scenes.push(scene4); //7
+        Game.scenes.push(sceneTransition4); // 8
+        Game.scenes.push(scene5); // 9
+        Game.scenes.push(sceneTransition5); // 10
+        Game.scenes.push(scene6); // 11
+        Game.scenes.push(sceneTransition6); // 12
+        Game.changeScene(0)
+       
+        function tick() {
+            Game.updateScene();
+            Input.update();
+            Game.scene().update(ctx);
+            Game.scene().draw(ctx);
+            Game.scene().remove();
+            Time.timePassed += Time.secondsBetweenFrame;
+        }
+        setInterval(tick, Time.millisecondsBetweenFrames)
+
+    </script>
+</body>
+
+</html>
